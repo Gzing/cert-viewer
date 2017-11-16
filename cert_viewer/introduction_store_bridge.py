@@ -6,6 +6,8 @@ class IntroStore(object):
         self.intro_db.introductions.insert_one(intro)
 
 
-def insert_introduction(introduction):
+def insert_introduction(introduction=None):
     from cert_viewer import intro_store
+    print(introduction)
     intro_store.insert(introduction)
+

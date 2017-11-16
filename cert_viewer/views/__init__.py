@@ -61,7 +61,7 @@ def add_rules(app, config):
     from cert_viewer.views.award_view import AwardView
     from cert_viewer.views.json_award_view import JsonAwardView
     from cert_viewer.views.renderable_view import RenderableView
-    from cert_viewer.views.issuer_view import IssuerView
+    from cert_viewer.views.issuer_view import IssuerView, IntroductionView
     from cert_viewer.views.verify_view import VerifyView
     from cert_viewer.views.request_view import RequestView
 
@@ -80,7 +80,7 @@ def add_rules(app, config):
     app.add_url_rule('/verify/<certificate_uid>',
                      view_func=VerifyView.as_view('verify', view=verifier_bridge.verify))
 
-    app.add_url_rule('/intro/', view_func=introduction_store_bridge.insert_introduction, methods=['POST', ])
+    app.add_url_rule('/intro/', view_func=IntroductionView.as_view(name='intro'), methods=['POST', ])
     app.add_url_rule('/request', view_func=RequestView.as_view(name='request'))
     app.add_url_rule('/faq', view_func=GenericView.as_view('faq', template='faq.html'))
     app.add_url_rule('/bitcoinkeys', view_func=GenericView.as_view('bitcoinkeys', template='bitcoinkeys.html'))

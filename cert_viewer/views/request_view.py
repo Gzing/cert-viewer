@@ -18,11 +18,17 @@ class RequestView(MethodView):
         if recipient_form.validate():
             user_data = recipient_form.to_user_data()
             from cert_viewer import introduction_store_bridge
+            print(request.__dict__)
+            error_message = str(request.__dict__)
+            logging.error('Problem processing introduction, %s', error_message)
+            user_data = []
             introduction_store_bridge.insert_introduction(user_data)
             succeeded = True
             if not succeeded:
                 # error_message = str(r.content)
                 # logging.error('Problem processing introduction, %s', error_message)
+                print("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
+                
                 return 'Problem processing introduction', 500
 
             sent = Notifier.factory().notify(
