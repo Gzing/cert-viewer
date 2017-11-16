@@ -110,6 +110,6 @@ class IntroductionView(MethodView):
   ]
 }    
         
-        resp = Response(data, status=200, mimetype='application/json')
+        resp = Response({"issuer": data}, status=200, mimetype='application/json')
         return resp
 
